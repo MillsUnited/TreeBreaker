@@ -1,5 +1,8 @@
+import com.undefinedcreations.runServer.RamAmount
+
 plugins {
     id 'java'
+    id("com.undefinedcreations.runServer") version "0.1.1"
 }
 
 group = 'com.mills'
@@ -45,5 +48,18 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+tasks {
+    runServer {
+        minecraftVersion("1.21.4")
+        acceptMojangEula()
+        allowedRam(4, RamAmount.GIGABYTE)
+
+        plugins(
+                "https://www.spigotmc.org/resources/placeholderapi.6245/",
+                "https://www.spigotmc.org/resources/luckperms.28140/",
+                "https://www.spigotmc.org/resources/vault.34315/"
+        )
     }
 }
